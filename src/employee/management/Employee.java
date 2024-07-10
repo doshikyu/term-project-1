@@ -10,8 +10,6 @@ public class Employee {
     private float salary;
 
     public Employee(String fullName, int department, float salary) {
-        if (fullName.isEmpty() || department < 1 || department > 5 || salary < 0)
-            throw new IllegalArgumentException("Wrong arguments passed to the constructor");
         this.id = ++idCnt;
         this.fullName = fullName;
         this.department = department;
