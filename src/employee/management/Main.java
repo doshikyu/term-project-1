@@ -16,9 +16,7 @@ public class Main {
         System.out.println(employeeBook.addEmployee(new Employee("Сотрудник Номер Одиннадцать", 120, 1000000)));
 
         System.out.println("Информация о сотрудниках:\n" + employeeBook);
-        employeeBook.removeEmployee(1);
-        System.out.println("Информация о сотрудниках:\n" + employeeBook);
-        employeeBook.addEmployee(new Employee("Анна Сергеевна Каренина", 1, 33000));
+        employeeBook.removeEmployee(6);
         System.out.println("Информация о сотрудниках:\n" + employeeBook);
 
         System.out.println("Получить сотрудника по id = 5: " + employeeBook.findEmployeeById(5));

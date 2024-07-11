@@ -3,7 +3,7 @@ package employee.management;
 import java.util.Objects;
 
 public class Employee {
-    static int idCnt;
+    private static int idCnt;
     private final int id;
     private String fullName;
     private int department;
