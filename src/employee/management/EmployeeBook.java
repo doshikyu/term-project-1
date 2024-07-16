@@ -1,24 +1,39 @@
 package employee.management;
 
 public class EmployeeBook {
-    private final Employee[] employees;
+    private Employee[] employees;
 
     public EmployeeBook(int size) {
         employees = new Employee[size];
     }
 
     public boolean addEmployee(Employee employee) {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                employees[i] = employee; // ID?..
-                return true;
+        try {
+            for (int i = 0; i < employees.length; i++) {
+                if (employees[i] == null) {
+                    employees[i] = employee;
+                    return true;
+                }
             }
+
+            Employee[] newEmployees = new Employee[employees.length + 1];
+            System.arraycopy(employees, 0, newEmployees, 0, employees.length);
+            newEmployees[employees.length - 1] = employee;
+            employees = newEmployees;
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
+
     public void removeEmployee(int id) {
-        employees[--id] = null;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getId() == id) {
+                employees[i] = null;
+                return;
+            }
+        }
     }
 
     public Employee findEmployeeById(int id) {
@@ -113,20 +128,13 @@ public class EmployeeBook {
                 deptEmployeesTmp[cnt++] = employee;
             }
         }
-        if (cnt > 0) {
-            Employee[] deptEmployees = new Employee[cnt];
-            System.arraycopy(deptEmployeesTmp, 0, deptEmployees, 0, cnt);
-
-            return deptEmployees;
-        }
-        return new Employee[0];
+        Employee[] deptEmployees = new Employee[cnt];
+        System.arraycopy(deptEmployeesTmp, 0, deptEmployees, 0, cnt);
+        return deptEmployees;
     }
 
     public Employee findEmployeeWithMinSalaryInDept(int departmentId) {
         Employee[] deptEmployees = getDepartmentEmployees(departmentId);
-/*        if (deptEmployees.length == 0) {
-            throw new IllegalArgumentException("The employees array is empty.");
-        }*/
         Employee minSalaryEmployee = null;
         for (Employee employee : deptEmployees) {
             if (employee != null && (minSalaryEmployee == null || employee.getSalary() < minSalaryEmployee.getSalary()))
@@ -138,9 +146,6 @@ public class EmployeeBook {
 
     public Employee findEmployeeWithMaxSalaryInDept(int departmentId) {
         Employee[] deptEmployees = getDepartmentEmployees(departmentId);
-/*        if (deptEmployees.length == 0) {
-            throw new IllegalArgumentException("The employees array is empty.");
-        }*/
         Employee maxSalaryEmployee = null;
         for (Employee employee : deptEmployees) {
             if (employee != null && (maxSalaryEmployee == null || employee.getSalary() > maxSalaryEmployee.getSalary()))
@@ -209,14 +214,8 @@ public class EmployeeBook {
                         .append(employee.getSalary()).append("\n");
             }
         }
-
-        if (!output.isEmpty()) {
-            System.out.print(output);
-        } else {
-            System.out.println("Не найдено");
-        }
+        System.out.print(!output.isEmpty() ? output : "Не найдено\n");
     }
-
 
     public void printEmployeesWithSalaryAboveThreshold(int minSalaryThreshold) {
         System.out.println("Сотрудники с заработной платой больше или равной " + minSalaryThreshold + ":");
@@ -229,11 +228,6 @@ public class EmployeeBook {
                         .append(employee.getSalary()).append("\n");
             }
         }
-
-        if (!output.isEmpty()) {
-            System.out.print(output);
-        } else {
-            System.out.println("Не найдены");
-        }
+        System.out.print(!output.isEmpty() ? output : "Не найдены\n");
     }
 }

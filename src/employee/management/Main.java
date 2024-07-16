@@ -8,7 +8,7 @@ public class Main {
         employeeBook.addEmployee(new Employee("Иван Иванович Чимша-Гималайский", 2, 72000));
         employeeBook.addEmployee(new Employee("Дмитрий Ионыч Старцев", 2, 64000));
         employeeBook.addEmployee(new Employee("Сергей Сергеевич Толстой", 3, 87000));
-        employeeBook.addEmployee(new Employee("Михаил Васильевич Тонкий", 3, 78000));
+        employeeBook.addEmployee(new Employee("Михаил Игоревич Тонкий", 3, 78000));
         employeeBook.addEmployee(new Employee("Иван Дмитриевич Лаевский", 4, 59000));
         employeeBook.addEmployee(new Employee("Надежда Федоровна Михайлова", 4, 37000));
         employeeBook.addEmployee(new Employee("Андрей Ефимыч Рагин", 5, 97000));
@@ -17,6 +17,8 @@ public class Main {
 
         System.out.println("Информация о сотрудниках:\n" + employeeBook);
         employeeBook.removeEmployee(6);
+        employeeBook.removeEmployee(11);
+        employeeBook.addEmployee(new Employee("Михаил Васильевич Тонкий", 3, 78000));
         System.out.println("Информация о сотрудниках:\n" + employeeBook);
 
         System.out.println("Получить сотрудника по id = 5: " + employeeBook.findEmployeeById(5));
